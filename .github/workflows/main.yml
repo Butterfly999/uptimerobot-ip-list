@@ -2,29 +2,28 @@ name: Update UptimeRobot IPs
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # ogni giorno alle 4:00 CET (2:00 UTC)
+    - cron: '0 2 * * *'  # ogni giorno alle 04:00 CET (02:00 UTC)
   workflow_dispatch:
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Download IP list
+      - name: Download UptimeRobot IP list
         run: |
-          curl -s https://uptimerobot.com/inc/files/ips/IPv4.txt -o uptimerobot.txt
+          curl -s http://uptimerobot.com/inc/files/ips/IPv4.txt -o uptimerobot.txt
 
       - name: Commit and push changes
         run: |
-          git config --global user.name github-actions
-          git config --global user.email github-actions@github.com
-      
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
           git fetch origin
           git reset --hard origin/main
-      
+
           git add uptimerobot.txt || true
           git commit -m "Update IPs" || echo "No changes to commit"
           git push origin HEAD:main
-
