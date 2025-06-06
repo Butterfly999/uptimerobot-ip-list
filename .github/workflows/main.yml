@@ -16,10 +16,12 @@ jobs:
         run: |
           curl -s http://uptimerobot.com/inc/files/ips/IPv4.txt -o uptimerobot.txt
 
-      - name: Commit and push
+      - name: Commit and push changes
         run: |
-          git config --global user.email "bot@example.com"
-          git config --global user.name "UptimeRobotBot"
-          git add uptimerobot.txt
-          git commit -m "Update IPs" || echo "No changes"
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          git add uptimerobot.txt || true
+          git commit -m "Update IPs" || echo "No changes to commit"
+          git pull --rebase
           git push
+
