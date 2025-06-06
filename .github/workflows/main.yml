@@ -1,6 +1,6 @@
 name: Update UptimeRobot IPs
 
-on:
+'on':
   schedule:
     - cron: '0 2 * * *'  # ogni giorno alle 04:00 CET (02:00 UTC)
   workflow_dispatch:
@@ -14,18 +14,18 @@ jobs:
 
       - name: Download UptimeRobot IP list
         run: |
-          curl -s http://uptimerobot.com/inc/files/ips/IPv4.txt -o uptimerobot.txt
+          curl -fsSL https://uptimerobot.com/inc/files/ips/IPv4.txt \
+            -o uptimerobot.txt
 
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-      
+
           git fetch origin main
           git checkout main
           git reset --hard origin/main
-      
+
           git add uptimerobot.txt || true
           git commit -m "Update IPs" || echo "No changes to commit"
           git push origin main
-
