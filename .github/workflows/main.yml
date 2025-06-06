@@ -1,6 +1,6 @@
 name: Update UptimeRobot IPs
 
-'on':
+on:
   schedule:
     - cron: '0 2 * * *'  # ogni giorno alle 04:00 CET (02:00 UTC)
   workflow_dispatch:
