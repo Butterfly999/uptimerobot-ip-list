@@ -1,9 +1,13 @@
+---
 name: Update UptimeRobot IPs
 
 'on':
   schedule:
     - cron: '0 2 * * *'  # ogni giorno alle 04:00 CET (02:00 UTC)
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   update:
