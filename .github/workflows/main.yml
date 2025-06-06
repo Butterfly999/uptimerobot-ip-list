@@ -1,0 +1,25 @@
+name: Update UptimeRobot IPs
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # ogni giorno alle 4:00 CET (2:00 UTC)
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Download IP list
+        run: |
+          curl -s http://uptimerobot.com/inc/files/ips/IPv4.txt -o uptimerobot.txt
+
+      - name: Commit and push
+        run: |
+          git config --global user.email "bot@example.com"
+          git config --global user.name "UptimeRobotBot"
+          git add uptimerobot.txt
+          git commit -m "Update IPs" || echo "No changes"
+          git push
