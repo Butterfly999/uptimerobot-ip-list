@@ -14,8 +14,8 @@ jobs:
 
       - name: Download UptimeRobot IP list
         run: |
-          curl -fsSL https://uptimerobot.com/inc/files/ips/IPv4.txt \
-            -o uptimerobot.txt
+          curl -fsSL https://uptimerobot.com/inc/files/ips/IPv4.txt -o uptimerobot.txt
+          echo "# updated at $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> uptimerobot.txt
 
       - name: Commit and push changes
         run: |
