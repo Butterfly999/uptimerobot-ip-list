@@ -20,8 +20,8 @@ jobs:
         run: |
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
+          git pull --rebase
           git add uptimerobot.txt || true
           git commit -m "Update IPs" || echo "No changes to commit"
-          git pull --rebase
           git push
 
